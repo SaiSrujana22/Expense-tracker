@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infra Monitor</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="logo-mark">◆</span>
+      <div>
+        <h1>Infra Monitor</h1>
+        <p class="subtitle">Live host telemetry</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="status-pill" id="status-pill">
+        <span class="dot" id="status-dot"></span>
+        <span id="status-text">Connecting…</span>
+      </div>
+      <div class="clock" id="clock">--:--:--</div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Signature element: a live pulse line for CPU load -->
+    <section class="pulse-card">
+      <div class="pulse-header">
+        <span class="pulse-label">CPU Pulse</span>
+        <span class="pulse-value" id="cpu-pulse-value">--%</span>
+      </div>
+      <canvas id="pulse-canvas" height="90"></canvas>
+    </section>
+
+    <section class="grid">
+      <article class="card" id="card-cpu">
+        <h2>CPU</h2>
+        <p class="metric-value" id="cpu-percent">--%</p>
+        <p class="metric-sub" id="cpu-cores">-- cores</p>
+        <div class="bar"><div class="bar-fill" id="cpu-bar"></div></div>
+        <div class="core-grid" id="core-grid"></div>
+      </article>
+
+      <article class="card" id="card-memory">
+        <h2>Memory</h2>
+        <p class="metric-value" id="mem-percent">--%</p>
+        <p class="metric-sub" id="mem-detail">-- / -- GB</p>
+        <div class="bar"><div class="bar-fill" id="mem-bar"></div></div>
+      </article>
+
+      <article class="card" id="card-disk">
+        <h2>Disk</h2>
+        <p class="metric-value" id="disk-percent">--%</p>
+        <p class="metric-sub" id="disk-detail">-- / -- GB</p>
+        <div class="bar"><div class="bar-fill" id="disk-bar"></div></div>
+      </article>
+
+      <article class="card">
+        <h2>Network</h2>
+        <p class="metric-value small" id="net-sent">↑ -- MB</p>
+        <p class="metric-value small" id="net-recv">↓ -- MB</p>
+        <p class="metric-sub">Cumulative since boot</p>
+      </article>
+
+      <article class="card">
+        <h2>Uptime</h2>
+        <p class="metric-value small" id="host-uptime">--</p>
+        <p class="metric-sub">Host uptime</p>
+        <p class="metric-value small" id="app-uptime">--</p>
+        <p class="metric-sub">Dashboard uptime</p>
+      </article>
+    </section>
+
+    <section class="table-card">
+      <h2>Top Processes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>PID</th>
+            <th>Name</th>
+            <th>CPU %</th>
+            <th>Memory %</th>
+          </tr>
+        </thead>
+        <tbody id="process-table-body">
+          <tr><td colspan="4" class="muted">Loading…</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Refreshes every 2s · No data is stored · <span id="last-updated">--</span></p>
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic>=2.0.0
+pyjwt
+bcrypt
+python-multipart
+psutil
+jinja2
